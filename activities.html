@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="All Adventure Activities at Udawalawe - Kayaking, Archery, Zip Line, Elephant Safari, and more.">
+    <title>All Activities | Udawalawe Adventure Camping</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional styles for activities page */
+        .activities-hero {
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px var(--container-padding) 60px;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+        }
+
+        .activities-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('images/hero_jungle_river.jpg') center/cover;
+            opacity: 0.15;
+        }
+
+        .activities-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .activities-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: var(--space-md);
+        }
+
+        .activities-hero p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 600px;
+        }
+
+        .activities-grid {
+            padding: var(--space-3xl) 0;
+            background-color: var(--bg-primary);
+        }
+
+        .activity-detail-card {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+            background-color: rgba(245, 247, 245, 0.03);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: var(--space-xl);
+            border: 1px solid rgba(245, 247, 245, 0.06);
+        }
+
+        @media (min-width: 768px) {
+            .activity-detail-card {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .activity-detail-card:nth-child(even) .activity-detail-image {
+                order: 2;
+            }
+        }
+
+        .activity-detail-image {
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+        }
+
+        .activity-detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .activity-detail-card:hover .activity-detail-image img {
+            transform: scale(1.05);
+        }
+
+        .activity-detail-content {
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .activity-detail-content h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+        }
+
+        .activity-detail-content p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: var(--space-md);
+        }
+
+        .activity-meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .activity-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .activity-meta-item svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+        }
+
+        .activity-detail-content .btn {
+            align-self: flex-start;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            margin-bottom: var(--space-lg);
+            transition: color var(--transition-fast);
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .back-link svg {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <header class="header scrolled" id="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.jpg" alt="Udawalawe Adventure Camping" class="logo-img">
+            </a>
+
+            <nav class="nav-desktop">
+                <a href="index.html#hero" class="nav-link">Home</a>
+                <a href="index.html#experiences" class="nav-link">Experiences</a>
+                <a href="activities.html" class="nav-link">All Activities</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <a href="#book" class="btn btn-primary nav-cta">Book Now</a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <nav class="mobile-nav">
+            <a href="index.html#hero" class="mobile-nav-link">Home</a>
+            <a href="index.html#experiences" class="mobile-nav-link">Experiences</a>
+            <a href="activities.html" class="mobile-nav-link">All Activities</a>
+            <a href="gallery.html" class="mobile-nav-link">Gallery</a>
+            <a href="index.html#contact" class="mobile-nav-link">Contact</a>
+        </nav>
+        <a href="#book" class="btn btn-primary mobile-cta">Book Now</a>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6" />
+        </svg>
+    </button>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="activities-hero">
+            <div class="activities-hero-content">
+                <h1>All <span class="accent">Activities</span></h1>
+                <p>Discover our complete range of adventure experiences at Udawalawe. From thrilling zip lines to
+                    peaceful river baths, we have something for everyone.</p>
+            </div>
+        </section>
+
+        <!-- Activities Grid -->
+        <section class="activities-grid">
+            <div class="container">
+                <a href="index.html#experiences" class="back-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                    Back to Experiences
+                </a>
+
+                <!-- Activity 1: Fun Games -->
+                <article class="activity-detail-card">
+                    <div class="activity-detail-image">
+                        <img src="images/activity_fun_games.jpg" alt="Fun Games" loading="lazy">
+                    </div>
+                    <div class="activity-detail-content">
+                        <h2>Fun Games</h2>
+                        <div class="activity-meta-row">
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 6v6l4 2" />
+                                </svg>
+                                2-3 hours
+                            </span>
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                </svg>
+                                All ages
+                            </span>
+                        </div>
+                        <p>Engage in a variety of exciting team games designed to bring out your competitive spirit
+                            while having loads of fun. From relay races to strategy games, our fun games session is
+                            perfect for families, friends, and corporate groups looking to bond and create lasting
+                            memories.</p>
+                        <a href="#book" class="btn btn-primary">Book Now</a>
+                    </div>
+                </article>
+
+                <!-- Activity 2: Kayaking -->
+                <article class="activity-detail-card">
+                    <div class="activity-detail-image">
+                        <img src="images/activity_kayaking.jpg" alt="Kayaking" loading="lazy">
+                    </div>
+                    <div class="activity-detail-content">
+                        <h2>Kayaking</h2>
+                        <div class="activity-meta-row">
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 6v6l4 2" />
+                                </svg>
+                                3 hours
+                            </span>
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                                </svg>
+                                Easy
+                            </span>
+                        </div>
+                        <p>Paddle through the serene waters of Udawalawe's rivers surrounded by lush jungle canopy. Our
+                            guided kayaking tours offer a unique perspective of the wilderness, with opportunities to
+                            spot kingfishers, monitor lizards, and other wildlife along the banks. Suitable for
+                            beginners and experienced paddlers alike.</p>
+                        <a href="#book" class="btn btn-primary">Book Now</a>
+                    </div>
+                </article>
+
+                <!-- Activity 3: Zip Line -->
+                <article class="activity-detail-card">
+                    <div class="activity-detail-image">
+                        <img src="images/activity_zipline.jpg" alt="Zip Line" loading="lazy">
+                    </div>
+                    <div class="activity-detail-content">
+                        <h2>Zip Line</h2>
+                        <div class="activity-meta-row">
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 6v6l4 2" />
+                                </svg>
+                                1-2 hours
+                            </span>
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                                </svg>
+                                Moderate
+                            </span>
+                        </div>
+                        <p>Experience the thrill of soaring through the jungle canopy on our zip line adventure. Feel
+                            the rush of adrenaline as you glide above the treetops, enjoying breathtaking views of the
+                            surrounding wilderness. Our professional guides ensure your safety while you enjoy this
+                            unforgettable experience.</p>
+                        <a href="#book" class="btn btn-primary">Book Now</a>
+                    </div>
+                </article>
+
+                <!-- Activity 4: Balance Cable -->
+                <article class="activity-detail-card">
+                    <div class="activity-detail-image">
+                        <img src="images/activity_balance_cable.jpg" alt="Balance Cable" loading="lazy">
+                    </div>
+                    <div class="activity-detail-content">
+                        <h2>Balance Cable</h2>
+                        <div class="activity-meta-row">
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 6v6l4 2" />
+                                </svg>
+                                1.5 hours
+                            </span>
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                                </svg>
+                                Moderate
+                            </span>
+                        </div>
+                        <p>Test your balance and courage on our suspended cable walks. Navigate through a series of
+                            elevated obstacles including rope bridges, balance beams, and tightropes. This activity is
+                            perfect for building confidence, improving coordination, and pushing your limits in a safe,
+                            controlled environment.</p>
+                        <a href="#book" class="btn btn-primary">Book Now</a>
+                    </div>
+                </article>
+
+                <!-- Activity 5: Slingshot Paintball -->
+                <article class="activity-detail-card">
+                    <div class="activity-detail-image">
+                        <img src="images/activity_paintball.jpg" alt="Slingshot Paintball" loading="lazy">
+                    </div>
+                    <div class="activity-detail-content">
+                        <h2>Slingshot Paintball</h2>
+                        <div class="activity-meta-row">
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 6v6l4 2" />
+                                </svg>
+                                2 hours
+                            </span>
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                                </svg>
+                                Active
+                            </span>
+                        </div>
+                        <p>Engage in an adrenaline-pumping paintball battle using slingshots in our specially designed
+                            outdoor arena. Strategize with your team, take cover behind natural obstacles, and aim for
+                            victory. All safety equipment provided. Perfect for team building, birthday parties, and
+                            friendly competitions.</p>
+                        <a href="#book" class="btn btn-primary">Book Now</a>
+                    </div>
+                </article>
+
+                <!-- Activity 6: Archery -->
+                <article class="activity-detail-card">
+                    <div class="activity-detail-image">
+                        <img src="images/activity_archery.jpg" alt="Archery" loading="lazy">
+                    </div>
+                    <div class="activity-detail-content">
+                        <h2>Archery</h2>
+                        <div class="activity-meta-row">
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 6v6l4 2" />
+                                </svg>
+                                1.5 hours
+                            </span>
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                                </svg>
+                                Moderate
+                            </span>
+                        </div>
+                        <p>Discover the ancient art of archery in our shaded forest range. Learn proper form, stance,
+                            and focus from our expert instructors. Whether you're a complete beginner or looking to
+                            refine your skills, our archery sessions provide a meditative and rewarding experience that
+                            connects you with a timeless tradition.</p>
+                        <a href="#book" class="btn btn-primary">Book Now</a>
+                    </div>
+                </article>
+
+                <!-- Activity 7: Air Rifle Target Hitting -->
+                <article class="activity-detail-card">
+                    <div class="activity-detail-image">
+                        <img src="images/activity_air_rifle.jpg" alt="Air Rifle Target Hitting" loading="lazy">
+                    </div>
+                    <div class="activity-detail-content">
+                        <h2>Air Rifle Target Hitting</h2>
+                        <div class="activity-meta-row">
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 6v6l4 2" />
+                                </svg>
+                                1 hour
+                            </span>
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                                </svg>
+                                Easy
+                            </span>
+                        </div>
+                        <p>Develop your focus and precision with our air rifle target shooting experience. Under the
+                            guidance of our safety-certified instructors, learn proper shooting techniques and challenge
+                            yourself to hit the bullseye. A fun and engaging activity suitable for beginners, groups,
+                            and families.</p>
+                        <a href="#book" class="btn btn-primary">Book Now</a>
+                    </div>
+                </article>
+
+                <!-- Activity 8: Udawalawe Elephant Safari -->
+                <article class="activity-detail-card">
+                    <div class="activity-detail-image">
+                        <img src="images/activity_elephant_safari.jpg" alt="Udawalawe Elephant Safari" loading="lazy">
+                    </div>
+                    <div class="activity-detail-content">
+                        <h2>Udawalawe Elephant Safari</h2>
+                        <div class="activity-meta-row">
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 6v6l4 2" />
+                                </svg>
+                                4 hours
+                            </span>
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                </svg>
+                                All ages
+                            </span>
+                        </div>
+                        <p>Embark on an unforgettable journey through Udawalawe National Park, home to over 500 wild
+                            elephants. Our experienced guides will take you deep into the park in comfortable safari
+                            vehicles, where you'll witness these magnificent creatures in their natural habitat, along
+                            with crocodiles, buffalo, and diverse birdlife.</p>
+                        <a href="#book" class="btn btn-primary">Book Now</a>
+                    </div>
+                </article>
+
+                <!-- Activity 9: River Bath -->
+                <article class="activity-detail-card">
+                    <div class="activity-detail-image">
+                        <img src="images/activity_river_bath.jpg" alt="River Bath" loading="lazy">
+                    </div>
+                    <div class="activity-detail-content">
+                        <h2>River Bath</h2>
+                        <div class="activity-meta-row">
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 6v6l4 2" />
+                                </svg>
+                                1-2 hours
+                            </span>
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                                </svg>
+                                Easy
+                            </span>
+                        </div>
+                        <p>Refresh yourself in the crystal-clear waters of our natural jungle streams. Surrounded by
+                            lush vegetation and the sounds of nature, our river bath experience offers a perfect way to
+                            cool off after a day of adventure. Safe, shallow areas make this suitable for all ages and
+                            swimming abilities.</p>
+                        <a href="#book" class="btn btn-primary">Book Now</a>
+                    </div>
+                </article>
+
+                <!-- Activity 10: Outbound Training -->
+                <article class="activity-detail-card">
+                    <div class="activity-detail-image">
+                        <img src="images/activity_outbound_training.jpg" alt="Outbound Training" loading="lazy">
+                    </div>
+                    <div class="activity-detail-content">
+                        <h2>Outbound Training</h2>
+                        <div class="activity-meta-row">
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 6v6l4 2" />
+                                </svg>
+                                Full day
+                            </span>
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                </svg>
+                                Corporate
+                            </span>
+                        </div>
+                        <p>Transform your team with our comprehensive outbound training programs. Designed for corporate
+                            groups, our activities focus on leadership development, communication skills,
+                            problem-solving, and team bonding. Our professional facilitators create customized
+                            experiences that deliver lasting results for your organization.</p>
+                        <a href="#book" class="btn btn-primary">Book Now</a>
+                    </div>
+                </article>
+
+                <!-- Activity 11: BBQ & Campfire Nights -->
+                <article class="activity-detail-card">
+                    <div class="activity-detail-image">
+                        <img src="images/activity_bbq_campfire.jpg" alt="BBQ & Campfire Nights" loading="lazy">
+                    </div>
+                    <div class="activity-detail-content">
+                        <h2>BBQ & Campfire Nights</h2>
+                        <div class="activity-meta-row">
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 6v6l4 2" />
+                                </svg>
+                                Evening
+                            </span>
+                            <span class="activity-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                </svg>
+                                All ages
+                            </span>
+                        </div>
+                        <p>End your day of adventure with a magical evening under the stars. Gather around a crackling
+                            campfire, enjoy a delicious Sri Lankan BBQ feast, and share stories with fellow travelers.
+                            Our campfire nights include music, stargazing, and the warmth of good company in the heart
+                            of the wilderness.</p>
+                        <a href="#book" class="btn btn-primary">Book Now</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Section 12: Booking -->
+    <section class="section booking-section" id="book">
+        <div class="booking-bg">
+            <!-- Darkened background for the whole section -->
+            <img src="images/booking_bg.jpg" alt="Booking background" loading="lazy">
+        </div>
+        <div class="booking-overlay"></div>
+
+        <div class="container relative-z3">
+            <div class="booking-card">
+                <!-- Left Column: Visual/Content -->
+                <div class="booking-visual">
+                    <img src="images/camping_tent_dusk.jpg" alt="Luxury camping under stars" class="visual-img">
+                    <div class="visual-content">
+                        <h2 class="visual-headline">
+                            <span class="headline-line">Your Journey</span>
+                            <span class="headline-line accent">Begins Here</span>
+                        </h2>
+                        <p class="visual-text">Tell us your dream adventure, and we'll handle the rest.</p>
+
+                        <div class="contact-methods">
+                            <div class="method-item">
+                                <span class="method-icon">📞</span>
+                                <span>+94 7X XXX XXXX</span>
+                            </div>
+                            <div class="method-item">
+                                <span class="method-icon">✉️</span>
+                                <span>hello@udawalaweadventure.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visual-overlay"></div>
+                </div>
+
+                <!-- Right Column: Form -->
+                <div class="booking-form-container">
+                    <form id="booking-form" class="premium-form" action="https://formspree.io/f/mvzbagnn" method="POST">
+                        <h3 class="form-title">Request a Booking</h3>
+
+                        <div class="form-grid">
+                            <div class="form-group floating">
+                                <input type="text" id="name" name="name" required placeholder=" " class="form-input">
+                                <label for="name" class="form-label">Name</label>
+                            </div>
+
+                            <div class="form-group floating">
+                                <input type="email" id="email" name="email" required placeholder=" " class="form-input">
+                                <label for="email" class="form-label">Email</label>
+                            </div>
+
+                            <div class="form-group floating">
+                                <input type="tel" id="phone" name="phone" placeholder=" " class="form-input">
+                                <label for="phone" class="form-label">Phone / WhatsApp</label>
+                            </div>
+
+                            <div class="form-group floating">
+                                <input type="date" id="date" name="date" class="form-input">
+                                <label for="date" class="form-label always-float">Preferred Date</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="guests" class="static-label">Group Size</label>
+                                <div class="select-wrapper">
+                                    <select id="guests" name="guests" class="form-select">
+                                        <option value="1-2">1-2 Guests</option>
+                                        <option value="3-5">3-5 Guests</option>
+                                        <option value="6-10">6-10 Guests</option>
+                                        <option value="10+">10+ Guests</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="activity" class="static-label">Interested In</label>
+                                <div class="select-wrapper">
+                                    <select id="activity" name="activity" class="form-select">
+                                        <option value="General Inquiry">General Inquiry</option>
+                                        <option value="Kayaking">Kayaking</option>
+                                        <option value="Archery">Archery</option>
+                                        <option value="Air Rifle">Air Rifle</option>
+                                        <option value="Camping">Luxury Camping</option>
+                                        <option value="Team Event">Team Event</option>
+                                        <option value="Full Package">Full Package</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group floating full-width">
+                            <textarea id="message" name="message" rows="3" placeholder=" "
+                                class="form-input"></textarea>
+                            <label for="message" class="form-label">Message / Special Requests</label>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <span>Send Request</span>
+                                <span class="arrow-icon">→</span>
+                            </button>
+                        </div>
+
+                        <div id="form-status" class="form-status"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer" id="contact">
+        <div class="footer-bg-gradient"></div>
+
+        <div class="container">
+            <!-- Top Section: CTA -->
+            <div class="footer-cta">
+                <div class="footer-cta-content">
+                    <h2 class="footer-headline">
+                        Are you ready?<br>
+                        <span class="text-white">Make a difference!</span>
+                    </h2>
+                </div>
+                <div class="footer-cta-actions">
+                    <a href="index.html#video" class="btn btn-text footer-video-btn">
+                        <span class="play-icon">▶</span>
+                        Watch video
+                    </a>
+                    <a href="#book" class="btn btn-white">Book Your Trip</a>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Links -->
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">
+                        <img src="images/logo.jpg" alt="Udawalawe Adventure Camping" class="logo-img-footer">
+                    </a>
+                    <div class="footer-lang">
+                        <span class="lang-icon">🌐</span>
+                        <select class="lang-select" aria-label="Language selector">
+                            <option value="en">English</option>
+                            <option value="si">Sinhala</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="footer-nav-grid">
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Get Started</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html#experiences">Our Experiences</a></li>
+                            <li><a href="index.html#packages">Packages</a></li>
+                            <li><a href="#book">Book Now</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">About Us</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html#story">Our Story</a></li>
+                            <li><a href="index.html#team">Guides</a></li>
+                            <li><a href="index.html#manifesto">Manifesto</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="#contact">Contact Us</a></li>
+                            <li><a href="index.html#faq">Questions</a></li>
+                            <li><a href="index.html#blog">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Legal</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html#terms">Terms & Conditions</a></li>
+                            <li><a href="index.html#privacy">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

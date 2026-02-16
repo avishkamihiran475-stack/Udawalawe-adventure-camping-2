@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Photo Gallery of Udawalawe Adventure Camping - Explore our wilderness experiences, activities, and memories.">
+    <title>Gallery | Udawalawe Adventure Camping</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Gallery page specific styles */
+        .gallery-hero {
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px var(--container-padding) 60px;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+        }
+
+        .gallery-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('images/gallery_6.jpg') center/cover;
+            opacity: 0.2;
+        }
+
+        .gallery-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .gallery-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: var(--space-md);
+        }
+
+        .gallery-hero p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 600px;
+        }
+
+        /* Masonry Gallery */
+        .gallery-full {
+            padding: var(--space-3xl) 0;
+            background-color: var(--bg-primary);
+        }
+
+        .masonry-grid {
+            column-count: 1;
+            column-gap: var(--space-md);
+            padding: 0 var(--container-padding);
+        }
+
+        @media (min-width: 640px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .masonry-grid {
+                column-count: 3;
+            }
+        }
+
+        @media (min-width: 1440px) {
+            .masonry-grid {
+                column-count: 4;
+            }
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: var(--space-md);
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .masonry-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform var(--transition-slow);
+        }
+
+        .masonry-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .masonry-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(11, 15, 13, 0.9) 0%, transparent 70%);
+            display: flex;
+            align-items: flex-end;
+            padding: var(--space-md);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .masonry-item:hover .masonry-overlay {
+            opacity: 1;
+        }
+
+        .masonry-caption {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background-color: rgba(11, 15, 13, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-base);
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: var(--radius-sm);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: 1px solid rgba(245, 247, 245, 0.3);
+            border-radius: 50%;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .lightbox-close:hover {
+            background-color: rgba(245, 247, 245, 0.1);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(245, 247, 245, 0.1);
+            border: none;
+            border-radius: 50%;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .lightbox-nav:hover {
+            background-color: var(--accent);
+            color: #1a1a1a;
+        }
+
+        .lightbox-nav.prev {
+            left: -70px;
+        }
+
+        .lightbox-nav.next {
+            right: -70px;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-nav.prev {
+                left: 10px;
+            }
+
+            .lightbox-nav.next {
+                right: 10px;
+            }
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            margin-bottom: var(--space-lg);
+            transition: color var(--transition-fast);
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .back-link svg {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <header class="header scrolled" id="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.jpg" alt="Udawalawe Adventure Camping" class="logo-img">
+            </a>
+
+            <nav class="nav-desktop">
+                <a href="index.html#hero" class="nav-link">Home</a>
+                <a href="index.html#experiences" class="nav-link">Experiences</a>
+                <a href="activities.html" class="nav-link">All Activities</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <a href="#book" class="btn btn-primary nav-cta">Book Now</a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <nav class="mobile-nav">
+            <a href="index.html#hero" class="mobile-nav-link">Home</a>
+            <a href="index.html#experiences" class="mobile-nav-link">Experiences</a>
+            <a href="activities.html" class="mobile-nav-link">All Activities</a>
+            <a href="gallery.html" class="mobile-nav-link">Gallery</a>
+            <a href="index.html#contact" class="mobile-nav-link">Contact</a>
+        </nav>
+        <a href="#book" class="btn btn-primary mobile-cta">Book Now</a>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6" />
+        </svg>
+    </button>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+            <button class="lightbox-nav prev" id="lightboxPrev">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+            <img src="" alt="Gallery image" id="lightboxImage">
+            <button class="lightbox-nav next" id="lightboxNext">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="gallery-hero">
+            <div class="gallery-hero-content">
+                <h1>Adventure <span class="accent">Gallery</span></h1>
+                <p>Explore moments captured from our wilderness experiences, activities, and the natural beauty of
+                    Udawalawe.</p>
+            </div>
+        </section>
+
+        <!-- Masonry Gallery -->
+        <section class="gallery-full">
+            <div class="container">
+                <a href="index.html#gallery" class="back-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                    Back to Home
+                </a>
+            </div>
+
+            <div class="masonry-grid">
+                <!-- Gallery Items -->
+                <div class="masonry-item" data-index="0">
+                    <img src="images/gallery_1.jpg" alt="Kayaking Adventure" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Kayaking Adventures</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="1">
+                    <img src="images/gallery_full_1.jpg" alt="Sunrise at Udawalawe" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Sunrise at Udawalawe</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="2">
+                    <img src="images/gallery_2.jpg" alt="Archery Session" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Archery Sessions</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="3">
+                    <img src="images/gallery_full_2.jpg" alt="Bird Watching" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Bird Watching</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="4">
+                    <img src="images/gallery_3.jpg" alt="Target Shooting" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Target Shooting</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="5">
+                    <img src="images/gallery_full_3.jpg" alt="Glamping Tent" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Luxury Glamping</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="6">
+                    <img src="images/gallery_4.jpg" alt="Camping at Sunset" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Sunset Camping</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="7">
+                    <img src="images/gallery_full_4.jpg" alt="Safari Adventure" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Safari Adventure</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="8">
+                    <img src="images/gallery_5.jpg" alt="Team Building" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Team Building</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="9">
+                    <img src="images/gallery_full_5.jpg" alt="BBQ Feast" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">BBQ Feast</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="10">
+                    <img src="images/gallery_6.jpg" alt="Elephant Safari" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Elephant Safari</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="11">
+                    <img src="images/gallery_full_6.jpg" alt="Family Adventure" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Family Adventures</span>
+                    </div>
+                </div>
+
+                <!-- Activity Images -->
+                <div class="masonry-item" data-index="12">
+                    <img src="images/activity_fun_games.jpg" alt="Fun Games" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Fun Games</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="13">
+                    <img src="images/activity_zipline.jpg" alt="Zip Line" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Zip Line</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="14">
+                    <img src="images/activity_balance_cable.jpg" alt="Balance Cable" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Balance Cable</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="15">
+                    <img src="images/activity_paintball.jpg" alt="Paintball" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Slingshot Paintball</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="16">
+                    <img src="images/activity_archery.jpg" alt="Archery" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Archery</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="17">
+                    <img src="images/activity_air_rifle.jpg" alt="Air Rifle" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Air Rifle</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="18">
+                    <img src="images/activity_elephant_safari.jpg" alt="Elephant Safari" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Elephant Safari</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="19">
+                    <img src="images/activity_river_bath.jpg" alt="River Bath" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">River Bath</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="20">
+                    <img src="images/activity_outbound_training.jpg" alt="Outbound Training" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Outbound Training</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="21">
+                    <img src="images/activity_bbq_campfire.jpg" alt="BBQ Campfire" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">BBQ & Campfire</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="22">
+                    <img src="images/hero_jungle_river.jpg" alt="Jungle River" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Jungle River</span>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-index="23">
+                    <img src="images/open_landscape_sky.jpg" alt="Open Landscape" loading="lazy">
+                    <div class="masonry-overlay">
+                        <span class="masonry-caption">Open Landscape</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Section 12: Booking -->
+    <section class="section booking-section" id="book">
+        <div class="booking-bg">
+            <!-- Darkened background for the whole section -->
+            <img src="images/booking_bg.jpg" alt="Booking background" loading="lazy">
+        </div>
+        <div class="booking-overlay"></div>
+
+        <div class="container relative-z3">
+            <div class="booking-card">
+                <!-- Left Column: Visual/Content -->
+                <div class="booking-visual">
+                    <img src="images/camping_tent_dusk.jpg" alt="Luxury camping under stars" class="visual-img">
+                    <div class="visual-content">
+                        <h2 class="visual-headline">
+                            <span class="headline-line">Your Journey</span>
+                            <span class="headline-line accent">Begins Here</span>
+                        </h2>
+                        <p class="visual-text">Tell us your dream adventure, and we'll handle the rest.</p>
+
+                        <div class="contact-methods">
+                            <div class="method-item">
+                                <span class="method-icon">📞</span>
+                                <span>+94 7X XXX XXXX</span>
+                            </div>
+                            <div class="method-item">
+                                <span class="method-icon">✉️</span>
+                                <span>hello@udawalaweadventure.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visual-overlay"></div>
+                </div>
+
+                <!-- Right Column: Form -->
+                <div class="booking-form-container">
+                    <form id="booking-form" class="premium-form" action="https://formspree.io/f/mvzbagnn" method="POST">
+                        <h3 class="form-title">Request a Booking</h3>
+
+                        <div class="form-grid">
+                            <div class="form-group floating">
+                                <input type="text" id="name" name="name" required placeholder=" " class="form-input">
+                                <label for="name" class="form-label">Name</label>
+                            </div>
+
+                            <div class="form-group floating">
+                                <input type="email" id="email" name="email" required placeholder=" " class="form-input">
+                                <label for="email" class="form-label">Email</label>
+                            </div>
+
+                            <div class="form-group floating">
+                                <input type="tel" id="phone" name="phone" placeholder=" " class="form-input">
+                                <label for="phone" class="form-label">Phone / WhatsApp</label>
+                            </div>
+
+                            <div class="form-group floating">
+                                <input type="date" id="date" name="date" class="form-input">
+                                <label for="date" class="form-label always-float">Preferred Date</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="guests" class="static-label">Group Size</label>
+                                <div class="select-wrapper">
+                                    <select id="guests" name="guests" class="form-select">
+                                        <option value="1-2">1-2 Guests</option>
+                                        <option value="3-5">3-5 Guests</option>
+                                        <option value="6-10">6-10 Guests</option>
+                                        <option value="10+">10+ Guests</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="activity" class="static-label">Interested In</label>
+                                <div class="select-wrapper">
+                                    <select id="activity" name="activity" class="form-select">
+                                        <option value="General Inquiry">General Inquiry</option>
+                                        <option value="Kayaking">Kayaking</option>
+                                        <option value="Archery">Archery</option>
+                                        <option value="Air Rifle">Air Rifle</option>
+                                        <option value="Camping">Luxury Camping</option>
+                                        <option value="Team Event">Team Event</option>
+                                        <option value="Full Package">Full Package</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group floating full-width">
+                            <textarea id="message" name="message" rows="3" placeholder=" "
+                                class="form-input"></textarea>
+                            <label for="message" class="form-label">Message / Special Requests</label>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <span>Send Request</span>
+                                <span class="arrow-icon">→</span>
+                            </button>
+                        </div>
+
+                        <div id="form-status" class="form-status"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer" id="contact">
+        <div class="footer-bg-gradient"></div>
+
+        <div class="container">
+            <!-- Top Section: CTA -->
+            <div class="footer-cta">
+                <div class="footer-cta-content">
+                    <h2 class="footer-headline">
+                        Are you ready?<br>
+                        <span class="text-white">Make a difference!</span>
+                    </h2>
+                </div>
+                <div class="footer-cta-actions">
+                    <a href="index.html#video" class="btn btn-text footer-video-btn">
+                        <span class="play-icon">▶</span>
+                        Watch video
+                    </a>
+                    <a href="#book" class="btn btn-white">Book Your Trip</a>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Links -->
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">
+                        <img src="images/logo.jpg" alt="Udawalawe Adventure Camping" class="logo-img-footer">
+                    </a>
+                    <div class="footer-lang">
+                        <span class="lang-icon">🌐</span>
+                        <select class="lang-select" aria-label="Language selector">
+                            <option value="en">English</option>
+                            <option value="si">Sinhala</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="footer-nav-grid">
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Get Started</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html#experiences">Our Experiences</a></li>
+                            <li><a href="index.html#packages">Packages</a></li>
+                            <li><a href="#book">Book Now</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">About Us</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html#story">Our Story</a></li>
+                            <li><a href="index.html#team">Guides</a></li>
+                            <li><a href="index.html#manifesto">Manifesto</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="#contact">Contact Us</a></li>
+                            <li><a href="index.html#faq">Questions</a></li>
+                            <li><a href="index.html#blog">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Legal</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html#terms">Terms & Conditions</a></li>
+                            <li><a href="index.html#privacy">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Lightbox functionality
+        (function () {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const lightboxPrev = document.getElementById('lightboxPrev');
+            const lightboxNext = document.getElementById('lightboxNext');
+            const galleryItems = document.querySelectorAll('.masonry-item');
+
+            let currentIndex = 0;
+            const images = Array.from(galleryItems).map(item => item.querySelector('img').src);
+
+            function openLightbox(index) {
+                currentIndex = index;
+                lightboxImage.src = images[currentIndex];
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function showPrev() {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                lightboxImage.src = images[currentIndex];
+            }
+
+            function showNext() {
+                currentIndex = (currentIndex + 1) % images.length;
+                lightboxImage.src = images[currentIndex];
+            }
+
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => openLightbox(index));
+            });
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+            lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') showPrev();
+                if (e.key === 'ArrowRight') showNext();
+            });
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Udawalawe Adventure Camping - Premium guided adventure experiences in Sri Lanka. Kayaking, archery, air rifle shooting, camping, and team games.">
+    <title>Udawalawe Adventure Camping | Wilderness. Wonder. You.</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="images/logo.jpg" alt="Udawalawe Adventure Camping" class="logo-img">
+            </a>
+
+            <nav class="nav-desktop">
+                <a href="#hero" class="nav-link">Home</a>
+                <a href="#experiences" class="nav-link">Experiences</a>
+                <a href="#packages" class="nav-link">Packages</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#book" class="nav-link">Contact</a>
+            </nav>
+
+            <a href="#book" class="btn btn-primary nav-cta">Book Now</a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                ( <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <nav class="mobile-nav">
+            <a href="#hero" class="mobile-nav-link">Home</a>
+            <a href="#experiences" class="mobile-nav-link">Experiences</a>
+            <a href="#packages" class="mobile-nav-link">Packages</a>
+            <a href="#gallery" class="mobile-nav-link">Gallery</a>
+            <a href="#book" class="mobile-nav-link">Contact</a>
+        </nav>
+        <a href="#book" class="btn btn-primary mobile-cta">Book Now</a>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6" />
+        </svg>
+    </button>
+
+    <main>
+        <!-- Section 1: Hero -->
+        <section class="section hero" id="hero">
+            <div class="hero-bg">
+                <img src="images/hero_jungle_river.jpg" alt="Misty jungle river in Udawalawe" loading="eager">
+            </div>
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <h1 class="hero-headline">
+                    <span class="headline-line">Wilderness</span>
+                    <span class="headline-line">Wonder</span>
+                    <span class="headline-line accent">You</span>
+                </h1>
+                <p class="hero-subheadline">Guided adventure experiences in Udawalawe—where the jungle meets the river.
+                </p>
+                <div class="hero-ctas">
+                    <a href="#experiences" class="btn btn-primary">Explore Experiences</a>
+                    <a href="#video" class="btn btn-text">
+                        <span class="play-icon">▶</span>
+                        Watch Video
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-info-bar">
+                <div class="info-item">
+                    <span class="info-label">Location</span>
+                    <span class="info-value">Udawalawe, Sri Lanka</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Group Size</span>
+                    <span class="info-value">2–12 guests</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Best Time</span>
+                    <span class="info-value">May–Oct season</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Kayaking -->
+        <section class="section activity-section" id="kayaking">
+            <div class="activity-bg">
+                <img src="images/kayaking_paddle_view.jpg" alt="Kayaking through jungle river" loading="lazy">
+            </div>
+            <div class="activity-overlay"></div>
+
+            <div class="activity-content">
+                <h2 class="activity-headline">
+                    <span class="headline-line">Paddle Through</span>
+                    <span class="headline-line accent">Paradise</span>
+                </h2>
+            </div>
+
+            <div class="activity-caption">
+                <p>Calm currents, jungle canopy, and kingfishers overhead.</p>
+            </div>
+
+            <a href="#book" class="btn btn-primary activity-cta">Book Kayaking</a>
+        </section>
+
+        <!-- Section 3: Archery -->
+        <section class="section activity-section" id="archery">
+            <div class="activity-bg">
+                <img src="images/archer_focus_closeup.jpg" alt="Archer focusing on target" loading="lazy">
+            </div>
+            <div class="activity-overlay"></div>
+
+            <div class="activity-content">
+                <h2 class="activity-headline">
+                    <span class="headline-line">Focus. Breathe.</span>
+                    <span class="headline-line accent">Release.</span>
+                </h2>
+            </div>
+
+            <div class="activity-caption">
+                <p>Traditional bows, expert guidance, and a target range under the trees.</p>
+            </div>
+
+            <a href="#book" class="btn btn-primary activity-cta">Try Archery</a>
+        </section>
+
+        <!-- Section 4: Air Rifle -->
+        <section class="section activity-section" id="shooting">
+            <div class="activity-bg">
+                <img src="images/target_range_scene.jpg" alt="Air rifle target range" loading="lazy">
+            </div>
+            <div class="activity-overlay"></div>
+
+            <div class="activity-content">
+                <h2 class="activity-headline">
+                    <span class="headline-line">Steady Hands.</span>
+                    <span class="headline-line accent">Sharp Eyes.</span>
+                </h2>
+            </div>
+
+            <div class="activity-caption">
+                <p>Air rifle shooting with safety-first coaching—fun for beginners and groups.</p>
+            </div>
+
+            <a href="#book" class="btn btn-primary activity-cta">Book Shooting</a>
+        </section>
+
+        <!-- Section 5: Camping -->
+        <section class="section activity-section" id="camping">
+            <div class="activity-bg">
+                <img src="images/camping_tent_dusk.jpg" alt="Luxury camping at dusk" loading="lazy">
+            </div>
+            <div class="activity-overlay"></div>
+
+            <div class="activity-content">
+                <h2 class="activity-headline">
+                    <span class="headline-line">Sleep Under</span>
+                    <span class="headline-line accent">The Stars</span>
+                </h2>
+            </div>
+
+            <div class="activity-caption">
+                <p>Tented camps, warm meals, and stories by the fire.</p>
+            </div>
+
+            <a href="#book" class="btn btn-primary activity-cta">View Stays</a>
+        </section>
+
+        <!-- Section 6: Team Games -->
+        <section class="section activity-section" id="team-games">
+            <div class="activity-bg">
+                <img src="images/team_games_field.jpg" alt="Team adventure games" loading="lazy">
+            </div>
+            <div class="activity-overlay"></div>
+
+            <div class="activity-content">
+                <h2 class="activity-headline">
+                    <span class="headline-line">Play Hard.</span>
+                    <span class="headline-line accent">Laugh Louder.</span>
+                </h2>
+            </div>
+
+            <div class="activity-caption">
+                <p>Team challenges designed to build bonds—and unforgettable memories.</p>
+            </div>
+
+            <a href="#book" class="btn btn-primary activity-cta">Plan a Group Event</a>
+        </section>
+
+        <!-- Section 7: Transition Manifesto -->
+        <section class="section transition-section" id="transition">
+            <div class="transition-bg">
+                <img src="images/open_landscape_sky.jpg" alt="Open landscape with dramatic sky" loading="lazy">
+            </div>
+            <div class="transition-overlay"></div>
+
+            <div class="transition-content">
+                <h2 class="transition-headline">
+                    <span class="headline-line">Your Adventure</span>
+                    <span class="headline-line accent">Starts Here</span>
+                </h2>
+                <p class="transition-label">Choose your experience.</p>
+            </div>
+        </section>
+
+        <!-- Section 8: Experience Grid -->
+        <section class="section experiences-section" id="experiences">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Pick Your Experience</h2>
+                    <p class="section-description">From quiet paddles to high-energy team games—each activity is guided,
+                        safe, and rooted in the landscape.</p>
+                </div>
+
+                <div class="experiences-grid" id="packages">
+                    <!-- Card 1 -->
+                    <article class="experience-card">
+                        <div class="card-image">
+                            <img src="images/experience_card_kayak.jpg" alt="Half-Day Kayaking" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Half-Day Kayak</h3>
+                            <p class="card-description">Paddle the river with a guide; wildlife stops included.</p>
+                            <div class="card-meta">
+                                <span class="meta-item">3 hrs</span>
+                                <span class="meta-item">Easy</span>
+                            </div>
+                            <a href="activities.html#kayaking" class="card-link">View details →</a>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article class="experience-card">
+                        <div class="card-image">
+                            <img src="images/experience_card_archery.jpg" alt="Archery Session" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Archery Session</h3>
+                            <p class="card-description">Learn form, stance, and focus in a shaded range.</p>
+                            <div class="card-meta">
+                                <span class="meta-item">1.5 hrs</span>
+                                <span class="meta-item">Moderate</span>
+                            </div>
+                            <a href="activities.html#archery" class="card-link">View details →</a>
+                        </div>
+                    </article>
+
+                    <!-- Card 3 -->
+                    <article class="experience-card">
+                        <div class="card-image">
+                            <img src="images/experience_card_shooting.jpg" alt="Target Shooting" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Target Shooting</h3>
+                            <p class="card-description">Air rifle intro with safety briefing and games.</p>
+                            <div class="card-meta">
+                                <span class="meta-item">1 hr</span>
+                                <span class="meta-item">Easy</span>
+                            </div>
+                            <a href="activities.html#shooting" class="card-link">View details →</a>
+                        </div>
+                    </article>
+
+                    <!-- Card 4 -->
+                    <article class="experience-card">
+                        <div class="card-image">
+                            <img src="images/experience_card_camp.jpg" alt="Sunset Camp Night" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Sunset Camp Night</h3>
+                            <p class="card-description">Dinner, fire, and a tent under the stars.</p>
+                            <div class="card-meta">
+                                <span class="meta-item">18 hrs</span>
+                                <span class="meta-item">Moderate</span>
+                            </div>
+                            <a href="activities.html#camping" class="card-link">View details →</a>
+                        </div>
+                    </article>
+
+                    <!-- Card 5 -->
+                    <article class="experience-card">
+                        <div class="card-image">
+                            <img src="images/experience_card_team.jpg" alt="Group Challenge Day" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Group Challenge Day</h3>
+                            <p class="card-description">Team games, races, and problem-solving.</p>
+                            <div class="card-meta">
+                                <span class="meta-item">4 hrs</span>
+                                <span class="meta-item">Active</span>
+                            </div>
+                            <a href="#book" class="card-link">View details →</a>
+                        </div>
+                    </article>
+
+                    <!-- Card 6 -->
+                    <article class="experience-card">
+                        <div class="card-image">
+                            <img src="images/experience_card_full_day.jpg" alt="Full Adventure Day" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Full Adventure Day</h3>
+                            <p class="card-description">Kayak + archery + lunch + camp fire.</p>
+                            <div class="card-meta">
+                                <span class="meta-item">8 hrs</span>
+                                <span class="meta-item">Active</span>
+                            </div>
+                            <a href="activities.html" class="card-link">View details →</a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="view-more-container">
+                    <a href="activities.html" class="btn btn-secondary btn-large">View All Activities</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: Gallery -->
+        <section class="section gallery-section" id="gallery">
+            <div class="container">
+                <div class="section-header centered">
+                    <h2 class="section-title">Adventure Gallery</h2>
+                    <p class="section-description">Moments captured from our wilderness experiences.</p>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="images/gallery_1.jpg" alt="Group kayaking on misty river" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Kayaking Adventures</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/gallery_2.jpg" alt="Archery in the forest" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Archery Sessions</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/gallery_3.jpg" alt="Target shooting range" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Target Shooting</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/gallery_4.jpg" alt="Luxury camping at sunset" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Luxury Camping</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/gallery_5.jpg" alt="Team building activities" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Team Challenges</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/gallery_6.jpg" alt="Wildlife safari elephant" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Wildlife Encounters</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="view-more-container">
+                    <a href="gallery.html" class="btn btn-secondary btn-large">View Full Gallery</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 10: Plan Your Visit -->
+        <section class="section plan-section" id="plan">
+            <div class="container">
+                <div class="plan-grid">
+                    <div class="plan-info">
+                        <h2 class="section-title">Plan Your Visit</h2>
+                        <p class="section-description">We're located near Udawalawe National Park—easy to reach by car
+                            or bus.</p>
+
+                        <ul class="plan-list">
+                            <li class="plan-item">
+                                <span class="plan-icon">🌤</span>
+                                <div class="plan-text">
+                                    <strong>Best time</strong>
+                                    <span>May–October (dry season)</span>
+                                </div>
+                            </li>
+                            <li class="plan-item">
+                                <span class="plan-icon">👥</span>
+                                <div class="plan-text">
+                                    <strong>Group sizes</strong>
+                                    <span>2–12 guests (larger on request)</span>
+                                </div>
+                            </li>
+                            <li class="plan-item">
+                                <span class="plan-icon">🎒</span>
+                                <div class="plan-text">
+                                    <strong>What to bring</strong>
+                                    <span>Sunscreen, hat, reusable bottle, light layers</span>
+                                </div>
+                            </li>
+                            <li class="plan-item">
+                                <span class="plan-icon">🗣</span>
+                                <div class="plan-text">
+                                    <strong>Languages</strong>
+                                    <span>English / Sinhala</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <a href="#directions" class="btn btn-secondary">Get Directions</a>
+                    </div>
+
+                    <div class="plan-map">
+                        <div class="map-card">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.829964123952!2d80.84220789999999!3d6.415888999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae407c84ee6574b%3A0xc999258b657fe597!2sFreedom%20Eco%20Resort!5e0!3m2!1sen!2slk!4v1771088676622!5m2!1sen!2slk"
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 11: Reviews -->
+        <section class="section reviews-section">
+            <div class="container">
+                <h2 class="section-title centered">What Guests Say</h2>
+
+                <div class="reviews-grid">
+                    <blockquote class="review-card">
+                        <p class="review-text">"A perfect mix of calm and adrenaline."</p>
+                        <footer class="review-author">
+                            <strong>Ruvini</strong>
+                            <span>Colombo</span>
+                        </footer>
+                    </blockquote>
+
+                    <blockquote class="review-card">
+                        <p class="review-text">"The guides made us feel safe and excited."</p>
+                        <footer class="review-author">
+                            <strong>Mark & Lisa</strong>
+                            <span>UK</span>
+                        </footer>
+                    </blockquote>
+
+                    <blockquote class="review-card">
+                        <p class="review-text">"Camping here was the highlight of our trip."</p>
+                        <footer class="review-author">
+                            <strong>Theja Family</strong>
+                            <span>Kandy</span>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 12: Booking -->
+        <section class="section booking-section" id="book">
+            <div class="booking-bg">
+                <!-- Darkened background for the whole section -->
+                <img src="images/booking_bg.jpg" alt="Booking background" loading="lazy">
+            </div>
+            <div class="booking-overlay"></div>
+
+            <div class="container relative-z3">
+                <div class="booking-card">
+                    <!-- Left Column: Visual/Content -->
+                    <div class="booking-visual">
+                        <img src="images/camping_tent_dusk.jpg" alt="Luxury camping under stars" class="visual-img">
+                        <div class="visual-content">
+                            <h2 class="visual-headline">
+                                <span class="headline-line">Your Journey</span>
+                                <span class="headline-line accent">Begins Here</span>
+                            </h2>
+                            <p class="visual-text">Tell us your dream adventure, and we'll handle the rest.</p>
+
+                            <div class="contact-methods">
+                                <div class="method-item">
+                                    <span class="method-icon">📞</span>
+                                    <span>+94 7X XXX XXXX</span>
+                                </div>
+                                <div class="method-item">
+                                    <span class="method-icon">✉️</span>
+                                    <span>hello@udawalaweadventure.com</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="visual-overlay"></div>
+                    </div>
+
+                    <!-- Right Column: Form -->
+                    <div class="booking-form-container">
+                        <form id="booking-form" class="premium-form" action="https://formspree.io/f/mvzbagnn"
+                            method="POST">
+                            <h3 class="form-title">Request a Booking</h3>
+
+                            <div class="form-grid">
+                                <div class="form-group floating">
+                                    <input type="text" id="name" name="name" required placeholder=" "
+                                        class="form-input">
+                                    <label for="name" class="form-label">Name</label>
+                                </div>
+
+                                <div class="form-group floating">
+                                    <input type="email" id="email" name="email" required placeholder=" "
+                                        class="form-input">
+                                    <label for="email" class="form-label">Email</label>
+                                </div>
+
+                                <div class="form-group floating">
+                                    <input type="tel" id="phone" name="phone" placeholder=" " class="form-input">
+                                    <label for="phone" class="form-label">Phone / WhatsApp</label>
+                                </div>
+
+                                <div class="form-group floating">
+                                    <input type="date" id="date" name="date" class="form-input">
+                                    <label for="date" class="form-label always-float">Preferred Date</label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="guests" class="static-label">Group Size</label>
+                                    <div class="select-wrapper">
+                                        <select id="guests" name="guests" class="form-select">
+                                            <option value="1-2">1-2 Guests</option>
+                                            <option value="3-5">3-5 Guests</option>
+                                            <option value="6-10">6-10 Guests</option>
+                                            <option value="10+">10+ Guests</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="activity" class="static-label">Interested In</label>
+                                    <div class="select-wrapper">
+                                        <select id="activity" name="activity" class="form-select">
+                                            <option value="General Inquiry">General Inquiry</option>
+                                            <option value="Kayaking">Kayaking</option>
+                                            <option value="Archery">Archery</option>
+                                            <option value="Air Rifle">Air Rifle</option>
+                                            <option value="Camping">Luxury Camping</option>
+                                            <option value="Team Event">Team Event</option>
+                                            <option value="Full Package">Full Package</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group floating full-width">
+                                <textarea id="message" name="message" rows="3" placeholder=" "
+                                    class="form-input"></textarea>
+                                <label for="message" class="form-label">Message / Special Requests</label>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    <span>Send Request</span>
+                                    <span class="arrow-icon">→</span>
+                                </button>
+                            </div>
+
+                            <div id="form-status" class="form-status"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 13: Footer / Contact -->
+        <footer class="site-footer" id="contact">
+            <div class="footer-bg-gradient"></div>
+
+            <div class="container">
+                <!-- Top Section: CTA -->
+                <div class="footer-cta">
+                    <div class="footer-cta-content">
+                        <h2 class="footer-headline">
+                            Are you ready?<br>
+                            <span class="text-white">Make a difference!</span>
+                        </h2>
+                    </div>
+                    <div class="footer-cta-actions">
+                        <a href="#video" class="btn btn-text footer-video-btn">
+                            <span class="play-icon">▶</span>
+                            Watch video
+                        </a>
+                        <a href="#book" class="btn btn-white">Book Your Trip</a>
+                    </div>
+                </div>
+
+                <!-- Bottom Section: Links -->
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <a href="#" class="footer-logo">
+                            <img src="images/logo.jpg" alt="Udawalawe Adventure Camping" class="logo-img-footer">
+                        </a>
+                        <div class="footer-lang">
+                            <span class="lang-icon">🌐</span>
+                            <select class="lang-select" aria-label="Language selector">
+                                <option value="en">English</option>
+                                <option value="si">Sinhala</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="footer-nav-grid">
+                        <div class="footer-col">
+                            <h4 class="footer-col-title">Get Started</h4>
+                            <ul class="footer-links">
+                                <li><a href="#experiences">Our Experiences</a></li>
+                                <li><a href="#packages">Packages</a></li>
+                                <li><a href="#book">Book Now</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4 class="footer-col-title">About Us</h4>
+                            <ul class="footer-links">
+                                <li><a href="#story">Our Story</a></li>
+                                <li><a href="#team">Guides</a></li>
+                                <li><a href="#manifesto">Manifesto</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4 class="footer-col-title">Support</h4>
+                            <ul class="footer-links">
+                                <li><a href="#contact">Contact Us</a></li>
+                                <li><a href="#faq">Questions</a></li>
+                                <li><a href="#blog">Blog</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4 class="footer-col-title">Legal</h4>
+                            <ul class="footer-links">
+                                <li><a href="#terms">Terms & Conditions</a></li>
+                                <li><a href="#privacy">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+        <script src="script.js"></script>
+</body>
+
+</html>
